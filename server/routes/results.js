@@ -25,7 +25,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/add", checkAdminMiddleware, async (req, res) => {
+router.post("/add", async (req, res) => {
   const { id, subject, marks, grade, gpa } = req.body;
 
   if (id && subject && marks && grade && gpa) {

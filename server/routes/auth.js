@@ -1,6 +1,7 @@
 const db = require("../config/db.config");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const checkAdminMiddleware = require("../middlewares/checkAdminMiddleware");
 const router = require("express").Router();
 
 // http://localhost:5000/api/auth/register
@@ -117,6 +118,13 @@ router.post("/login", async (req, res) => {
       msg: "Please Fill Up All Fields",
     });
   }
+});
+
+router.get("/verify", checkAdminMiddleware, (req, res) => {
+  res.status(200).send({
+    success: true,
+    msg: "Verified",
+  });
 });
 
 module.exports = router;

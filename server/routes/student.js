@@ -2,6 +2,24 @@ const db = require("../config/db.config");
 
 const router = require("express").Router();
 
+router.get("/", async (req, res) => {
+  try {
+    let job = await db.query("SELECT * from students");
+
+    res.status(200).send({
+      success: true,
+      msg: "Student Fetch Success",
+      data: job[0],
+    });
+  } catch (error) {
+    return res.status(500).send({
+      success: false,
+      msg: "Internal Server Error",
+      error,
+    });
+  }
+});
+
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
